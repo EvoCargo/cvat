@@ -454,8 +454,8 @@ RESTRICTIONS = {
     # this setting limits the number of projects for the user
     'project_limit': None,
 
-    # this setting reduces task visibility to owner and assignee only
-    'reduce_task_visibility': False,
+    # this setting reduse task visibility to owner and assignee only
+    'reduce_task_visibility': True,
 
     # allow access to analytics component to users with the following roles
     'analytics_access': (
@@ -473,7 +473,7 @@ CACHES = {
        'LOCATION' : CACHE_ROOT,
        'TIMEOUT' : None,
        'OPTIONS' : {
-            'size_limit' : 2 ** 40, # 1 Tb
+            'size_limit' : 2 ** 30 * 10, # 10 GB 
        }
    }
 }
