@@ -1,0 +1,25 @@
+version: '3.3'
+
+services:
+  cvat_proxy:
+    environment:
+      CVAT_HOST: '172.19.129.1'
+    ports:
+      - "80:80"
+ 
+  serverless:
+    container_name: nuclio
+    image: quay.io/nuclio/dashboard:1.6.1-amd64
+ 
+  cvat:
+    environment:
+      CVAT_SHARE_URL: 'Mounted from /home/evocargo/cvat/share host directory'
+    volumes:
+      - cvat_share:/home/django/share:ro
+ 
+volumes:
+  cvat_share:
+    driver_opts:
+      type: none
+      device: /home/evocargo/cvat/share
+      o: bind
