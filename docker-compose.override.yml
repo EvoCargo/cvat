@@ -3,7 +3,7 @@ version: '3.3'
 services:
   cvat_proxy:
     environment:
-      CVAT_HOST: cvat.evocargo.com cvat-old.evocargo.com
+      CVAT_HOST: cvat.evocargo.com 
     ports:
       - "80:80"
       - "443:443"
