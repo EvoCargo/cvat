@@ -1,11 +1,15 @@
 version: '3.3'
-
+ 
 services:
   cvat_proxy:
     environment:
-      CVAT_HOST: '172.19.129.1'
+      CVAT_HOST: cvat.evocargo.com cvat-old.evocargo.com
     ports:
       - "80:80"
+      - "443:443"
+    volumes:
+      - ./letsencrypt-webroot:/var/tmp/letsencrypt-webroot
+      - /etc/ssl/private:/etc/ssl/private
  
   serverless:
     container_name: nuclio
@@ -13,10 +17,22 @@ services:
  
   cvat:
     environment:
-      CVAT_SHARE_URL: 'Mounted from /home/evocargo/cvat/share host directory'
+      ALLOWED_HOSTS: '*'
+      CVAT_SHARE_URL: 'Mounted from /home/dkorshunov/cvat/share host directory'
     volumes:
       - cvat_share:/home/django/share:ro
- 
+    build:
+      context: .
+      args:
+        http_proxy:
+        https_proxy:
+        no_proxy: nuclio,${no_proxy}
+        socks_proxy:
+        USER: 'django'
+        DJANGO_CONFIGURATION: 'production'
+        TZ: 'Etc/UTC'
+        CLAM_AV: 'no'  
+    
 volumes:
   cvat_share:
     driver_opts:
