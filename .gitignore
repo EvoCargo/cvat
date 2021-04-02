@@ -13,6 +13,7 @@
 node_modules
 /Mask_RCNN/
 /letsencrypt-webroot/
+/backup
 
 # Ignore temporary files
 docker-compose.override.yml
@@ -34,7 +35,6 @@ yarn-error.log*
 #Ignore Cypress tests temp files
 /tests/cypress/fixtures
 /tests/cypress/screenshots
-.idea/
 
 #Ignore helm-related files
 /helm-chart/Chart.lock
