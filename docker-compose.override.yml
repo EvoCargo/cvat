@@ -11,27 +11,12 @@ services:
       - ./letsencrypt-webroot:/var/tmp/letsencrypt-webroot
       - /etc/ssl/private:/etc/ssl/private
  
-  serverless:
-    container_name: nuclio
-    image: quay.io/nuclio/dashboard:1.6.1-amd64
- 
   cvat:
     environment:
       ALLOWED_HOSTS: '*'
       CVAT_SHARE_URL: 'Mounted from /home/dkorshunov/cvat/share host directory'
     volumes:
       - cvat_share:/home/django/share:ro
-    build:
-      context: .
-      args:
-        http_proxy:
-        https_proxy:
-        no_proxy: nuclio,${no_proxy}
-        socks_proxy:
-        USER: 'django'
-        DJANGO_CONFIGURATION: 'production'
-        TZ: 'Etc/UTC'
-        CLAM_AV: 'no'  
     
 volumes:
   cvat_share:
