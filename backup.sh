@@ -26,8 +26,8 @@ up -d --build
 ~/mc cp -r $DIR minio/cvat-backup
 
 # Delete all backups older than 30 days from this server
-find -type d -path "./backup/*" -ctime +30 -exec rm -rf {} \;
+find -type d -path "~/backup/*" -ctime +60 -exec rm -rf {} \;
 
-# Delete all backups older than 60 days from min.io storage
-~/mc rm --recursive --force --older-than 60d minio/cvat-backup
+# Delete all backups older than 30 days from min.io storage
+~/mc rm --recursive --force --older-than 30d minio/cvat-backup
 
