@@ -10,7 +10,11 @@ mkdir -p $DIR
 # Stop all containers and get backup data from posgres db with annotation data and kibana data
 docker-compose stop
 mkdir -p backup
+
 docker run --rm --name temp_backup --volumes-from cvat_db -v $(pwd)/$DIR:/backup ubuntu tar -cjvf /backup/cvat_db.tar.bz2 /var/lib/postgresql/data
+
+docker run --rm --name temp_backup --volumes-from cvat -v $(pwd)/$DIR:/backup ubuntu tar -cjvf /backup/cvat_data.tar.bz2 /home/django/data
+
 docker run --rm --name temp_backup --volumes-from cvat_elasticsearch -v $(pwd)/$DIR:/backup ubuntu tar -cjvf /backup/cvat_events.tar.bz2 /usr/share/elasticsearch/data
 
 
