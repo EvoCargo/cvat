@@ -13,7 +13,7 @@
 node_modules
 /Mask_RCNN/
 /letsencrypt-webroot/
-/backup
+/backup/
 
 # Ignore temporary files
 docker-compose.override.yml

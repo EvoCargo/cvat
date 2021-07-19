@@ -466,7 +466,7 @@ CACHES = {
        'LOCATION' : CACHE_ROOT,
        'TIMEOUT' : None,
        'OPTIONS' : {
-            'size_limit' : 2 ** 40, # 1 Tb
+            'size_limit' : 2 ** 30 * 10, # 10 GB 
        }
    }
 }
