@@ -1,23 +1,32 @@
 version: '3.3'
- 
+
 services:
-  cvat_proxy:
+  # cvat_proxy:
+  #   environment:
+  #     CVAT_HOST: cvat.evocargo.com
+  #   ports:
+  #     - "80:80"
+  #     - "443:443"
+  #   volumes:
+  #     - ./letsencrypt-webroot:/var/tmp/letsencrypt-webroot
+  #     - /etc/ssl/private:/etc/ssl/private
+  traefik:
     environment:
-      CVAT_HOST: cvat.evocargo.com 
+      CVAT_HOST: cvat.evocargo.com
     ports:
       - "80:80"
       - "443:443"
     volumes:
       - ./letsencrypt-webroot:/var/tmp/letsencrypt-webroot
       - /etc/ssl/private:/etc/ssl/private
- 
+
   cvat:
     environment:
       ALLOWED_HOSTS: '*'
       CVAT_SHARE_URL: 'Mounted from /home/dkorshunov/cvat/share host directory'
     volumes:
       - cvat_share:/home/django/share:ro
-    
+
 volumes:
   cvat_share:
     driver_opts:
