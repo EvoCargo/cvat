@@ -471,7 +471,7 @@ CACHES = {
    'default' : {
        'BACKEND' : 'diskcache.DjangoCache',
        'LOCATION' : CACHE_ROOT,
-       'TIMEOUT' : None,
+       'TIMEOUT' : 60 * 60 * 24 * 5,  # 5 days
        'OPTIONS' : {
             'size_limit' : 2 ** 30 * 10, # 10 GB 
        }

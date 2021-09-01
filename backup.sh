@@ -1,7 +1,7 @@
 #!/usr/bin/env zsh
 
 # Define directory with current datetime
-DIR=$HOME/cvat/backup/$(date +%Y%m%d_%H%M%S)
+DIR=$HOME/backup/$(date +%Y%m%d_%H%M%S)
 
 # Create this dir if not exist
 mkdir -p $DIR
@@ -30,7 +30,7 @@ up -d --build
 ~/mc cp -r $DIR minio/cvat-backup
 
 # Delete all backups older than 5 days from this server
-find ~/cvat/backup/* -type d -ctime +5 -exec rm -rf {} \;
+find ~/backup/* -type d -ctime +5 -exec rm -rf {} \;
 
 # Delete all backups older than 30 days from min.io storage
 ~/mc rm --recursive --force --older-than 30d minio/cvat-backup
