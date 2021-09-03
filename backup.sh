@@ -9,7 +9,6 @@ mkdir -p $DIR
 
 # Stop all containers and get backup data from posgres db with annotation data and kibana data
 docker-compose stop
-mkdir -p backup
 
 docker run --rm --name temp_backup --volumes-from cvat_db -v $DIR:/backup ubuntu tar -cjvf /backup/cvat_db.tar.bz2 /var/lib/postgresql/data
 
@@ -20,11 +19,12 @@ docker run --rm --name temp_backup --volumes-from cvat_elasticsearch -v $DIR:/ba
 
 # Run all stoped containers
 docker-compose \
--f docker-compose.yml \
--f docker-compose.dev.yml \
--f docker-compose.override.yml \
--f components/analytics/docker-compose.analytics.yml \
-up -d --build
+  -f docker-compose.yml \
+  -f docker-compose.dev.yml \
+  -f docker-compose.https.yml \
+  -f docker-compose.override.yml \
+  -f components/analytics/docker-compose.analytics.yml \
+  up -d --build
 
 # Copy created dir with backup data to min.oi storage
 ~/mc cp -r $DIR minio/cvat-backup
