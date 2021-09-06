@@ -11,5 +11,5 @@ volumes:
   cvat_share:
     driver_opts:
       type: none
-      device: /home/evocargo/cvat/share
+      device: /media/data/cvat/share
       o: bind
